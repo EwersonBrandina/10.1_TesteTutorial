@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaulHref ="" ></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!modoDeEdicao">Dados Contato</ion-title>
+    <ion-title *ngIf="modoDeEdicao">Editar Contato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-intem *ngIf="!modoDeEdicao">
+    <div class="contato" >
+      <ion-item>Nome: {{contatoSelecionado.nome}}</ion-item>
+      <ion-item>sobrenome {{contatoSelecionado.sobrenome}}</ion-item>
+      <ion-item>Telefone: {{contatoSelecionado.numero}}</ion-item>
+      <ion-item>Tipo: {{contatoSelecionado.tipo}}</ion-item>
+      <ion-item>E-mail: {{contatoSelecionado.email}}</ion-item>
+    </div>
+  </ion-intem>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="iniciarEdicao()" *ngIf="!modoDeEdicao">
+      <ion-icon name="pencil-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentAlert()" *ngIf="!modoDeEdicao">
+        <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <form *ngIf="modoDeEdicao" #form="ngForm" (ngSubmit)="encerrarEdicao()" [formGroup]="userForm">
+    <div class="edit__display">
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input [(ngModel)]="contatoSelecionado.nome" formControlName="nome"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Sobrenome</ion-label>
+        <ion-input [(ngModel)]="contatoSelecionado.sobrenome" formControlName="sobrenome"></ion-input>
+      </ion-item>
+      
+      <ion-list>
+        <ion-item>
+          <ion-select placeholder="Selecione o tipo do contato:" [(ngModel)]="contatoSelecionado.tipo" [ngModelOptions]="{standalone: true}">
+            <ion-select-option value="celular" name="celular">Celular</ion-select-option>
+            <ion-select-option value="fixo" name="fixo">Fixo</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+            
+      <ion-item>
+        <ion-label position="floating">Número</ion-label>
+        <ion-input [(ngModel)]="contatoSelecionado.numero" formControlName="numero"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">E-mail</ion-label>
+        <ion-input [(ngModel)]="contatoSelecionado.email" formControlName="email"></ion-input>
+      </ion-item>
+    </div>
+    <div class="button__display">
+      <ion-button type="submit">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </div>
+ </form>
+
+</ion-content>

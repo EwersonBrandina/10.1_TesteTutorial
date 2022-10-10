@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaulHref ="" ></ion-back-button>
+  </ion-buttons>
+    <ion-title>Lista de Contatos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let todosDados of todosDados" routerLink="/detalhes-contatos/{{todosDados.id}}">
+      <ion-label>{{todosDados.nome}} {{todosDados.sobrenome}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
